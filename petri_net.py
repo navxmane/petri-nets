@@ -27,6 +27,10 @@ def define_matriz(p, t):
     return matriz
 
 
-transicoes, places = define_transicoes_places()
-pre_matriz = define_matriz(places, transicoes)
-post_matriz = define_matriz(places, transicoes)
+def main():
+    transicoes, places = define_transicoes_places()
+    pre_matriz = define_matriz(places, transicoes)
+    post_matriz = define_matriz(places, transicoes)
+
+
+main()
