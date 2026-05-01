@@ -13,6 +13,7 @@ def define_transicoes_places():
         except ValueError:
             print("\n[!] ERRO: Digite um número inteiro!\n")
 
+
 def define_matriz(p, t):
     matriz = np.zeros((p, t))
     for i in range(p):
@@ -26,16 +27,44 @@ def define_matriz(p, t):
                     print('\n[!] ERRO: Digite um valor inteiro!\n')
     return matriz
 
+
 def initial_mark(places):
     x = []
-    for _ in range(places):
-        x.append(int(input(f'Dgite a marcação para posição {_ + 1}')))
-    return x
+    for i in range(places):
+        while True:
+            try:
+                mark = int(input(f'Digite a marcação inicial para posição {i + 1}'))
+                if mark < 0:
+                    print('Digite um núero maior que zero!')
+                    continue
+                x.append(mark)
+                break
+            except ValueError:
+                print('\n[!] ERRO: Digite um valor inteiro!\n')
+
+    return np.array(x)
+
+
+def pode_disparar(A_out, x, transicao):
+    for p in range(x):
+        if x[p] >= A_out[p][transicao]:
+            return True
+    return False
+
+
+def disparo(A_out, A_in, x, t):
+    x_next = list(x)
+    for p_idx in range(len(x)):
+        if x[p_idx] != float('inf'):
+            x_next[p_idx] += A_in[p_idx][t] - A_out[p_idx][t]
+    return tuple(x_next)
+
+
 
 def main():
     transicoes, places = define_transicoes_places()
-    pre_matriz = define_matriz(places, transicoes)
-    post_matriz = define_matriz(places, transicoes)
+    A_out = define_matriz(places, transicoes)
+    A_in = define_matriz(places, transicoes)
     x_ = initial_mark(places)
 
 
