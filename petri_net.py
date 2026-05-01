@@ -26,11 +26,17 @@ def define_matriz(p, t):
                     print('\n[!] ERRO: Digite um valor inteiro!\n')
     return matriz
 
+def initial_mark(places):
+    x = []
+    for _ in range(places):
+        x.append(int(input(f'Dgite a marcação para posição {_ + 1}')))
+    return x
 
 def main():
     transicoes, places = define_transicoes_places()
     pre_matriz = define_matriz(places, transicoes)
     post_matriz = define_matriz(places, transicoes)
+    x_ = initial_mark(places)
 
 
 main()
